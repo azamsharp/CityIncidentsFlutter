@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1023726420925",
+    "project_id": "city-incidents-b1201",
+    "storage_bucket": "city-incidents-b1201.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023726420925:android:9a781612f426dd32f088d4",
+        "android_client_info": {
+          "package_name": "com.example.citycare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023726420925-iocnkohc6ola1m66arqaen9o62fdqj2k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBeZhIH7gCKb9fe-fsfLeccDtwMrG3qUE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023726420925-iocnkohc6ola1m66arqaen9o62fdqj2k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1023726420925-47cvb7evejfrtdumigo75nrg7hi16efq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.azamsharp.citycare"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

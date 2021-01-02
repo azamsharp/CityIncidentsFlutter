@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1023726420925-47cvb7evejfrtdumigo75nrg7hi16efq.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1023726420925-47cvb7evejfrtdumigo75nrg7hi16efq</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCvAEPtEkH8b9OZbVdH2PnKGN2q3a0xhvU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1023726420925</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.azamsharp.citycare</string>
+	<key>PROJECT_ID</key>
+	<string>city-incidents-b1201</string>
+	<key>STORAGE_BUCKET</key>
+	<string>city-incidents-b1201.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1023726420925:ios:a2cdc72901c8088af088d4</string>
+</dict>
+</plist>

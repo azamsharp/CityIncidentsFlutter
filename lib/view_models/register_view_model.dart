@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterViewModel {
-  final String email;
-  final String password;
+  String email;
+  String password;
 
-  RegisterViewModel({this.email, this.password});
+  RegisterViewModel(this.email, this.password);
 
   Future<bool> register() async {
     try {

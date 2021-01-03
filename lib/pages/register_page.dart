@@ -19,10 +19,8 @@ class RegisterPage extends StatelessWidget {
 
   void _registerUser(BuildContext context) async {
     if (_formKey.currentState.validate()) {
-      final email = _emailController.text;
-      final password = _emailController.text;
-
-      _registerVM = RegisterViewModel(email: email, password: password);
+      _registerVM.email = _emailController.text;
+      _registerVM.password = _passwordController.text;
 
       bool isRegistered = await _registerVM.register();
       if (isRegistered) {

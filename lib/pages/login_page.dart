@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/utils/constants.dart';
+import 'package:todo_list/view_models/login_view_model.dart';
 
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  LoginViewModel _loginVM;
+
+  void _login() {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    _loginVM.login(email, password);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final _loginVM = Provider.of<LoginViewModel>(context);
+
     return Scaffold(
         appBar: AppBar(title: Text("Login")),
         body: Padding(
@@ -44,8 +57,11 @@ class LoginPage extends StatelessWidget {
                   FlatButton(
                       child:
                           Text("Login", style: TextStyle(color: Colors.white)),
-                      onPressed: () {},
-                      color: Colors.blue)
+                      onPressed: () {
+                        _login();
+                      },
+                      color: Colors.blue),
+                  Text(_loginVM.message)
                 ],
               )),
         ));

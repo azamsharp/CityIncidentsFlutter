@@ -1,23 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:todo_list/utils/constants.dart';
 
-class RegisterViewModel {
-  String email;
-  String password;
+class RegisterViewModel extends ChangeNotifier {
+  String message = "";
 
-  RegisterViewModel(this.email, this.password);
+  Future<bool> register(String email, String password) async {
+    bool isRegistered = false;
 
-  Future<bool> register() async {
     try {
       final userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      return userCredential != null;
+      isRegistered = userCredential != null;
     } on FirebaseAuthException catch (e) {
-      print(e);
+      if (e.code == "weak-password") {
+        message = Constants.WEAK_PASSWORD;
+      } else if (e.code == "email-already-in-use") {
+        message = Constants.EMAIL_ALREADY_IN_USE;
+      }
+
+      notifyListeners();
     } catch (e) {
       print(e);
     }
 
-    return false;
+    return isRegistered;
   }
 }

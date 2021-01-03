@@ -1,20 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/pages/login_page.dart';
 import 'package:todo_list/pages/register_page.dart';
+import 'package:todo_list/view_models/login_view_model.dart';
+import 'package:todo_list/view_models/register_view_model.dart';
 
 class IncidentListPage extends StatelessWidget {
-  void _navigateToRegisterPage(BuildContext context) async {
-    bool isRegistered = await Navigator.push(
+  void _navigateToRegisterPage(BuildContext context) {
+    Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => RegisterPage(), fullscreenDialog: true));
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => RegisterViewModel(),
+                child: RegisterPage()),
+            fullscreenDialog: true));
   }
 
   void _navigateToLoginPage(BuildContext context) async {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => LoginPage(), fullscreenDialog: true));
+            builder: (context) => ChangeNotifierProvider(
+                create: (context) => LoginViewModel(), child: LoginPage()),
+            fullscreenDialog: true));
   }
 
   @override

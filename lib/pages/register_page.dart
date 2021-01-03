@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/pages/login_page.dart';
 import 'package:todo_list/utils/constants.dart';
 import 'package:todo_list/view_models/register_view_model.dart';
@@ -19,10 +20,10 @@ class RegisterPage extends StatelessWidget {
 
   void _registerUser(BuildContext context) async {
     if (_formKey.currentState.validate()) {
-      _registerVM.email = _emailController.text;
-      _registerVM.password = _passwordController.text;
+      final email = _emailController.text;
+      final password = _passwordController.text;
 
-      bool isRegistered = await _registerVM.register();
+      bool isRegistered = await _registerVM.register(email, password);
       if (isRegistered) {
         // pop to the back screen
         //Navigator.pop(context, true);
@@ -33,15 +34,22 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _registerVM = Provider.of<RegisterViewModel>(context);
+
     return Scaffold(
         appBar: AppBar(title: Text("Register")),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Form(
+          child: SingleChildScrollView(
+            child: Form(
               key: _formKey,
               child: Column(
                 children: [
-                  Image(image: AssetImage(Constants.CITY_CARE_IMAGE)),
+                  CircleAvatar(
+                    radius: 150,
+                    backgroundImage:
+                        AssetImage(Constants.REGISTER_PAGE_HERO_IMAGE),
+                  ),
                   TextFormField(
                     controller: _emailController,
                     validator: (value) {
@@ -69,9 +77,15 @@ class RegisterPage extends StatelessWidget {
                       onPressed: () {
                         _registerUser(context);
                       },
-                      color: Colors.blue)
+                      color: Colors.blue),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(_registerVM.message),
+                  )
                 ],
-              )),
+              ),
+            ),
+          ),
         ));
   }
 }

@@ -9,8 +9,6 @@ class RegisterViewModel {
   final String email; 
   final String password; 
 
-
-
   RegisterViewModel({this.email, this.password});
 
   void register() async {

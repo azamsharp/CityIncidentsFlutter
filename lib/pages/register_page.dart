@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_list/pages/login_page.dart';
-import 'package:todo_list/utils/constants.dart';
-import 'package:todo_list/view_models/register_view_model.dart';
+import 'package:city_care/pages/login_page.dart';
+import 'package:city_care/utils/constants.dart';
+import 'package:city_care/view_models/register_view_model.dart';
 
 class RegisterPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -21,7 +21,7 @@ class RegisterPage extends StatelessWidget {
   void _registerUser(BuildContext context) async {
     if (_formKey.currentState.validate()) {
       final email = _emailController.text;
-      final password = _passwordController.text;
+      final password = _emailController.text;
 
       bool isRegistered = await _registerVM.register(email, password);
       if (isRegistered) {
@@ -78,10 +78,7 @@ class RegisterPage extends StatelessWidget {
                         _registerUser(context);
                       },
                       color: Colors.blue),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(_registerVM.message),
-                  )
+                  Text(_registerVM.message)
                 ],
               ),
             ),

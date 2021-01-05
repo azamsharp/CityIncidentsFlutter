@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo_list/pages/login_page.dart';
-import 'package:todo_list/pages/register_page.dart';
-import 'package:todo_list/view_models/login_view_model.dart';
-import 'package:todo_list/view_models/register_view_model.dart';
+import 'package:city_care/extensions/navigator.dart';
 
 class IncidentListPage extends StatelessWidget {
-  void _navigateToRegisterPage(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-                create: (context) => RegisterViewModel(),
-                child: RegisterPage()),
-            fullscreenDialog: true));
+
+  void _navigateToRegisterPage(BuildContext context) async {
+    final isRegistered = await AppNavigator.navigateToRegisterPage(context);
   }
 
   void _navigateToLoginPage(BuildContext context) async {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ChangeNotifierProvider(
-                create: (context) => LoginViewModel(), child: LoginPage()),
-            fullscreenDialog: true));
+    final isLoggedIn = await AppNavigator.navigateToLoginPage(context);
+    print(isLoggedIn); 
+    if(!isLoggedIn) {
+      AppNavigator.navigateToMyIncidentsPage(context); 
+    }
   }
 
   @override
@@ -34,14 +24,20 @@ class IncidentListPage extends StatelessWidget {
             DrawerHeader(child: Text("Menu")),
             ListTile(title: Text("Home")),
             ListTile(
+              title: Text("Add Incident"), 
+              onTap: () {
+                AppNavigator.navigateToAddIncidentsPage(context);
+              },
+            ),
+            ListTile(
                 title: Text("Login"),
                 onTap: () {
-                  _navigateToLoginPage(context);
+                   _navigateToLoginPage(context);
                 }),
             ListTile(
                 title: Text("Register"),
                 onTap: () {
-                  _navigateToRegisterPage(context);
+                  _navigateToRegisterPage(context); 
                 }),
             ListTile(title: Text("Add Incident"))
           ],

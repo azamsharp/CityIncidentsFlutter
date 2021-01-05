@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:todo_list/pages/incident_list_page.dart';
+import 'package:city_care/pages/incident_list_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_list/utils/constants.dart';
+import 'package:city_care/utils/constants.dart';
 
 class RegisterViewModel extends ChangeNotifier {
   String message = "";

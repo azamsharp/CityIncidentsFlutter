@@ -1,4 +1,4 @@
-name: todo_list
+name: city_care
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -27,6 +27,10 @@ dependencies:
   cloud_firestore: ^0.14.4
   firebase_auth: ^0.18.4+1
   provider: ^4.3.2+3
+  image_picker: ^0.6.7+17
+  firebase_storage: ^5.2.0
+  uuid: ^2.2.2
+  
 
 
   # The following adds the Cupertino Icons font to your application.

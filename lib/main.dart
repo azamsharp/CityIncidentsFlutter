@@ -1,6 +1,6 @@
+import 'package:city_care/pages/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:city_care/pages/incident_list_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      home: IncidentListPage(), 
+      home: MainPage(), 
       title: "City Incidents"
     );
     

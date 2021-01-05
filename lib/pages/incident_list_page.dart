@@ -1,47 +1,43 @@
+import 'package:city_care/view_models/incident_list_view_model.dart';
+import 'package:city_care/view_models/incident_view_model.dart';
+import 'package:city_care/widgets/incident_list.dart';
 import 'package:flutter/material.dart';
-import 'package:city_care/extensions/navigator.dart';
 
-class IncidentListPage extends StatelessWidget {
 
-  void _navigateToRegisterPage(BuildContext context) async {
-    final isRegistered = await AppNavigator.navigateToRegisterPage(context);
+class IncidentListPage extends StatefulWidget {
+  @override 
+  _IncidentListPage createState() => _IncidentListPage(); 
+}
+
+class _IncidentListPage extends State<IncidentListPage> {
+
+  IncidentListViewModel _incidentListVM = IncidentListViewModel(); 
+  List<IncidentViewModel> _incidents = List<IncidentViewModel>(); 
+
+  @override
+  void initState() {
+    super.initState();
+    _populateAllIncidents(); 
   }
 
-  void _navigateToLoginPage(BuildContext context) async {
-    final isLoggedIn = await AppNavigator.navigateToLoginPage(context);
-    print(isLoggedIn); 
-    if(!isLoggedIn) {
-      AppNavigator.navigateToMyIncidentsPage(context); 
-    }
+  void _populateAllIncidents() async {
+    
+    final incidents = await _incidentListVM.getAllIncidents();
+    setState(() {
+      _incidents = incidents; 
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: Drawer(
-            child: ListView(
-          children: [
-            DrawerHeader(child: Text("Menu")),
-            ListTile(title: Text("Home")),
-            ListTile(
-              title: Text("Add Incident"), 
-              onTap: () {
-                AppNavigator.navigateToAddIncidentsPage(context);
-              },
-            ),
-            ListTile(
-                title: Text("Login"),
-                onTap: () {
-                   _navigateToLoginPage(context);
-                }),
-            ListTile(
-                title: Text("Register"),
-                onTap: () {
-                  _navigateToRegisterPage(context); 
-                }),
-            ListTile(title: Text("Add Incident"))
-          ],
-        )),
-        appBar: AppBar(title: Text("Latest Incidents")));
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: IncidentList(_incidents),
+          ),
+        )
+      );
   }
 }

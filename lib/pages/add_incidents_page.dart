@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:city_care/models/incident.dart';
 import 'package:city_care/view_models/add_incident_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -54,8 +53,10 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
 
   void _saveIncident(BuildContext context) async {
 
+    final userId = FirebaseAuth.instance.currentUser.uid; 
+
     //final userId = FirebaseAuth.instance.currentUser.uid; 
-    final userId = "yqim47oujkRWbGAjcg8eyCTIImR2";
+    //final userId = "yqim47oujkRWbGAjcg8eyCTIImR2";
 
     // validate the form
     if (_formKey.currentState.validate()) {

@@ -26,51 +26,57 @@ class LoginPage extends StatelessWidget {
     
     _loginVM = Provider.of<LoginViewModel>(context);
 
-    return Scaffold(
-        appBar: AppBar(title: Text("Login")),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SingleChildScrollView(
-                child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    CircleAvatar(
-                        maxRadius: 150,
-                        backgroundImage:
-                            AssetImage(Constants.LOGIN_PAGE_HERO_IMAGE)),
-                    TextFormField(
-                      controller: _emailController,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Email is required!";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(hintText: "Email"),
-                    ),
-                    TextFormField(
-                      controller: _passwordController,
-                      obscureText: true,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return "Password is required!";
-                        }
-                        return null;
-                      },
-                      decoration: InputDecoration(hintText: "Password"),
-                    ),
-                    FlatButton(
-                        child:
-                            Text("Login", style: TextStyle(color: Colors.white)),
-                        onPressed: () {
-                          _login(context);
+    return WillPopScope(
+          onWillPop: () {
+            Navigator.pop(context, false); 
+            return Future<bool>.value(false); 
+          } ,
+          child: Scaffold(
+          appBar: AppBar(title: Text("Login")),
+          body: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SingleChildScrollView(
+                  child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                          maxRadius: 150,
+                          backgroundImage:
+                              AssetImage(Constants.LOGIN_PAGE_HERO_IMAGE)),
+                      TextFormField(
+                        controller: _emailController,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Email is required!";
+                          }
+                          return null;
                         },
-                        color: Colors.blue),
-                    Text(_loginVM.message)
-                  ],
-                )),
-          ),
-        ));
+                        decoration: InputDecoration(hintText: "Email"),
+                      ),
+                      TextFormField(
+                        controller: _passwordController,
+                        obscureText: true,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return "Password is required!";
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(hintText: "Password"),
+                      ),
+                      FlatButton(
+                          child:
+                              Text("Login", style: TextStyle(color: Colors.white)),
+                          onPressed: () {
+                            _login(context);
+                          },
+                          color: Colors.blue),
+                      Text(_loginVM.message)
+                    ],
+                  )),
+            ),
+          )),
+    );
   }
 }

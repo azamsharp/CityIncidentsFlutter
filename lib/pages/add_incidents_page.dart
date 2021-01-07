@@ -93,7 +93,10 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
     _addIncidentVM = Provider.of<AddIncidentViewModel>(context); 
 
     return Scaffold(
-        appBar: AppBar(title: Text("Add Incident")),
+        appBar: AppBar(
+          title: Text("Add Incident"), 
+          
+        ),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),

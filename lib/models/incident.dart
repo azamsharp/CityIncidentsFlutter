@@ -8,7 +8,7 @@ class Incident {
   final String title; 
   final String description; 
   final String photoURL; 
-  DateTime incidentDate = DateTime.now();
+  final DateTime incidentDate;
 
   Incident({this.userId, this.title, this.description, this.photoURL,this.incidentDate}); 
 

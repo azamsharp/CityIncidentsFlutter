@@ -1,7 +1,6 @@
 import 'package:city_care/extensions/navigator.dart';
 import 'package:city_care/pages/incident_list_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -13,6 +12,7 @@ class _MainPage extends State<MainPage> {
 
   String _title = "Latest Incidents"; 
   bool _isSignedIn = false; 
+  bool _incidentAdded = false; 
 
   @override
   void initState() {
@@ -26,7 +26,9 @@ class _MainPage extends State<MainPage> {
       .listen((user) {
         if(user == null) {
           // user is signed out 
-          _isSignedIn = false; 
+          setState(() {
+            _isSignedIn = false; 
+          });
         } else {
           // user is signed in
           setState(() {
@@ -37,7 +39,7 @@ class _MainPage extends State<MainPage> {
   }
 
   void _navigateToRegisterPage(BuildContext context) async {
-    //final isRegistered = await AppNavigator.navigateToRegisterPage(context);
+
   }
 
   void _navigateToLoginPage(BuildContext context) async {
@@ -48,14 +50,20 @@ class _MainPage extends State<MainPage> {
     }
   }
 
-  void _navigateToAddIncidentsPage(BuildContext context) {
-    AppNavigator.navigateToAddIncidentsPage(context); 
+  void _navigateToAddIncidentsPage(BuildContext context) async {
+    bool incidentAdded = await AppNavigator.navigateToAddIncidentsPage(context); 
+    if(incidentAdded) {
+      setState(() {
+        _incidentAdded = incidentAdded; 
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
 
     final currentUser = FirebaseAuth.instance.currentUser; 
+    print(currentUser);
 
     return Scaffold(
         appBar: AppBar(title: Text(_title)),

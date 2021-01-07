@@ -5,12 +5,12 @@ class LoginViewModel extends ChangeNotifier {
   String message = "";
 
   Future<bool> login(String email, String password) async {
-
+    print("login"); 
     bool isLoggedIn = false; 
 
     try {
       final userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email.trim(), password: password.trim());
+          .signInWithEmailAndPassword(email: email, password: password);
       isLoggedIn = userCredential != null; 
     } on FirebaseAuthException catch (e) {
       message = e.code; // THIS ALWAYS GETS CALLED EVEN WITH CORRECT PASSWORD

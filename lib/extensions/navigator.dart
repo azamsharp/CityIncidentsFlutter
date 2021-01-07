@@ -10,10 +10,10 @@ import 'package:city_care/view_models/login_view_model.dart';
 import 'package:city_care/view_models/register_view_model.dart';
 import 'package:city_care/pages/register_page.dart';
 
-extension AppNavigator on Navigator {
+class AppNavigator {
 
-  static void navigateToAddIncidentsPage(BuildContext context,[fullscreenDialog = true]) {
-    Navigator.push(context, MaterialPageRoute(
+  static Future<bool> navigateToAddIncidentsPage(BuildContext context,[fullscreenDialog = true]) async {
+    return await Navigator.push(context, MaterialPageRoute(
       builder: (context) => 
       ChangeNotifierProvider(
         create: (context) => AddIncidentViewModel(), 

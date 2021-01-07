@@ -5,6 +5,7 @@ import 'package:city_care/view_models/add_incident_view_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 enum PhotoOptions { camera, library }
 
@@ -17,7 +18,7 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
   
   File _image;
   final _formKey = GlobalKey<FormState>();
-  final AddIncidentViewModel _addIncidentVM = AddIncidentViewModel();
+  AddIncidentViewModel _addIncidentVM; 
 
   final _titleController = TextEditingController(); 
   final _descriptionController = TextEditingController(); 
@@ -55,9 +56,6 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
 
     final userId = FirebaseAuth.instance.currentUser.uid; 
 
-    //final userId = FirebaseAuth.instance.currentUser.uid; 
-    //final userId = "yqim47oujkRWbGAjcg8eyCTIImR2";
-
     // validate the form
     if (_formKey.currentState.validate()) {
       // upload the photo to the Firebase storage
@@ -68,11 +66,11 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
         final description = _descriptionController.text; 
 
         // save the incident in the Firestore database 
-        final incident = Incident(userId: userId, title: title, description: description, photoURL: filePath); 
+        final incident = Incident(userId: userId, title: title, description: description, photoURL: filePath, incidentDate: DateTime.now()); 
         final isSaved = await _addIncidentVM.saveIncident(incident); 
         if(isSaved) {
           // close the modal 
-          Navigator.pop(context); 
+          Navigator.pop(context, true); 
         }
 
       }
@@ -80,8 +78,20 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
 
   }
 
+  Widget _buildLoadingWidget() {
+    switch(_addIncidentVM.loadingStatus) {
+      case LoadingStatus.loading:   
+        return CircularProgressIndicator(); 
+      default: 
+        return SizedBox.shrink(); 
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+
+    _addIncidentVM = Provider.of<AddIncidentViewModel>(context); 
+
     return Scaffold(
         appBar: AppBar(title: Text("Add Incident")),
         body: Center(
@@ -152,7 +162,8 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(_addIncidentVM.message),
-                  ) 
+                  ), 
+                  _buildLoadingWidget() 
                 ]),
               ),
             ),

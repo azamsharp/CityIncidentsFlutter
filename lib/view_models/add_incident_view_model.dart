@@ -5,13 +5,20 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:uuid/uuid.dart';
 
+enum LoadingStatus {
+  loading, success, failure 
+}
+
 class AddIncidentViewModel extends ChangeNotifier {
   
   String message = ""; 
+  LoadingStatus loadingStatus; 
 
   Future<bool> saveIncident(Incident incident) async {
 
     bool isSaved = false; 
+    loadingStatus = LoadingStatus.loading; 
+    notifyListeners(); 
     
     try {
        
@@ -20,12 +27,14 @@ class AddIncidentViewModel extends ChangeNotifier {
         .add(incident.toMap());
         
         isSaved = true; 
+        loadingStatus = LoadingStatus.success; 
 
     } catch(e) {
       message = "Unable to save incident"; 
-      notifyListeners(); 
+      loadingStatus = LoadingStatus.failure; 
     } 
-   
+
+    notifyListeners(); 
     return isSaved; 
   }
 

@@ -1,5 +1,6 @@
 
 import 'package:city_care/models/incident.dart';
+import 'package:intl/intl.dart';
 
 class IncidentViewModel {
 
@@ -17,6 +18,10 @@ class IncidentViewModel {
 
   String get photoURL {
     return incident.photoURL; 
+  }
+
+  String get incidentDate {
+    return DateFormat("MM-dd-yyyy HH:mm:ss").format(incident.incidentDate);
   }
 
 }

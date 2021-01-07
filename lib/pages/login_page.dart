@@ -15,8 +15,8 @@ class LoginPage extends StatelessWidget {
     final password = _passwordController.text;
 
     bool isLoggedIn = await _loginVM.login(email, password);
-    if(!isLoggedIn) { // TODO - change that in the future 
-      Navigator.pop(context, isLoggedIn);
+    if(isLoggedIn) { 
+      Navigator.pop(context, true);
     }
 
   }

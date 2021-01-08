@@ -80,7 +80,7 @@ class _AddIncidentsPage extends State<AddIncidentsPage> {
 
   Widget _buildLoadingWidget() {
     switch(_addIncidentVM.loadingStatus) {
-      case LoadingStatus.loading:   
+      case LoadingState.loading:   
         return CircularProgressIndicator(); 
       default: 
         return SizedBox.shrink(); 

@@ -54,25 +54,16 @@ class _IncidentListPage extends State<IncidentListPage> {
   }
 
   void _navigateToRegisterPage(BuildContext context) async {
-
+    final bool isRegistered = await AppNavigator.navigateToRegisterPage(context); 
+    if(isRegistered) {
+      AppNavigator.navigateToLoginPage(context); 
+    }
   }
 
   void _navigateToLoginPage(BuildContext context) async {
 
-    /*
-    final isLoggedIn = Navigator.push(context, MaterialPageRoute(
-      builder: (context) => 
-      ChangeNotifierProvider(
-        create: (context) => LoginViewModel(), 
-        child: LoginPage()
-      )
-    ,fullscreenDialog: true));
-
-    print(isLoggedIn); */
-
     final bool isLoggedIn = await AppNavigator.navigateToLoginPage(context);
-    print(isLoggedIn);
-    if (!isLoggedIn) {
+    if (isLoggedIn) {
       AppNavigator.navigateToMyIncidentsPage(context);
     } 
   }
@@ -93,6 +84,13 @@ class _IncidentListPage extends State<IncidentListPage> {
           children: [
             DrawerHeader(child: Text("Menu")),
             ListTile(title: Text("Home")),
+            _isSignedIn
+                ? ListTile(
+                    title: Text("My Incidents"),
+                    onTap: () async {
+                        AppNavigator.navigateToMyIncidentsPage(context); 
+                    })
+                : SizedBox.shrink(),
             _isSignedIn
                 ? ListTile(
                     title: Text("Add Incident"),
@@ -122,7 +120,8 @@ class _IncidentListPage extends State<IncidentListPage> {
                       // logout the user
                       await FirebaseAuth.instance.signOut();
                     })
-                : SizedBox.shrink()
+                : SizedBox.shrink(), 
+             
           ],
         )),
         body: Padding(

@@ -1,3 +1,4 @@
+import 'package:city_care/extensions/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -11,25 +12,22 @@ class RegisterPage extends StatelessWidget {
   final _passwordController = TextEditingController();
   RegisterViewModel _registerVM;
 
-  void _navigateToLoginPage(BuildContext context) {
-    Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => LoginPage(), fullscreenDialog: true));
-  }
+  Future<bool> _registerUser(BuildContext context) async {
 
-  void _registerUser(BuildContext context) async {
+    bool isRegistered = false; 
+
     if (_formKey.currentState.validate()) {
       final email = _emailController.text;
       final password = _emailController.text;
 
-      bool isRegistered = await _registerVM.register(email, password);
+      isRegistered = await _registerVM.register(email, password);
       if (isRegistered) {
         // pop to the back screen
-        //Navigator.pop(context, true);
-        _navigateToLoginPage(context);
+        Navigator.pop(context, true);
       }
     }
+
+    return isRegistered; 
   }
 
   @override

@@ -13,7 +13,7 @@ class LoginViewModel extends ChangeNotifier {
           .signInWithEmailAndPassword(email: email, password: password);
       isLoggedIn = userCredential != null; 
     } on FirebaseAuthException catch (e) {
-      message = e.code; // THIS ALWAYS GETS CALLED EVEN WITH CORRECT PASSWORD
+      message = e.code; 
       print(message); 
       notifyListeners();
     } catch (e) {
